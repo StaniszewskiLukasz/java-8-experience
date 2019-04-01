@@ -22,6 +22,7 @@ public class StreamTest {
         List<String> input = asList("This", "is", "java", "8");
         List<String> result = Stream8.mapToUpperCase(input);
         assertThat(result, contains("THIS", "IS", "JAVA", "8"));
+        //DONE
     }
 
     @Test
@@ -29,13 +30,16 @@ public class StreamTest {
         List<Integer> numbers = Arrays.asList(1, 4, 16, 256);
         List<Integer> squares = Stream8.returnSquareRoot(numbers);
         assertThat(squares, is(equalTo(Arrays.asList(1, 2, 4, 16))));
+        //DONE
     }
 
     @Test
     public void shouldReturnAgeFromUser() {
         List<User> users = User.getUsersWithAge(18, 20);
         List<Integer> ageFromUsers = Stream8.getAgeFromUsers(users);
+        System.out.println(ageFromUsers);
         assertThat(ageFromUsers, is(equalTo(Arrays.asList(18, 20))));
+        //DONE
     }
 
     @Test
@@ -43,6 +47,7 @@ public class StreamTest {
         List<User> users = User.getUsersWithAge(18, 20, 21, 22, 23);
         users = Stream8.getLimitedUserList(users, 2);
         assertThat(users, is(equalTo(Arrays.asList(users.get(0), users.get(1)))));
+        //DONE
     }
 
     @Test
@@ -50,6 +55,7 @@ public class StreamTest {
         List<User> users = User.getUsersWithAge(18, 20, 21, 22, 23, 24, 25, 26);
         Integer count = Stream8.countUsersOlderThen25(users);
         assertTrue(count == 1);
+        //DONE
     }
 
     @Test

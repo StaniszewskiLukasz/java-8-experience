@@ -3,21 +3,23 @@ package academy.elqoo.java8.stream;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Stream8 {
 
     public static List<Integer> returnSquareRoot(List<Integer> numbers){
-        throw new NotImplementedException();
+        return numbers.stream().map(Math::sqrt).map(Double::intValue).collect(toList());
+        //mapuję wyciągająć pierwiastek, to mapowanie zwraca double
+        // więć z doubli mapujemy na inty i wrzucamy do listy
     }
 
     public static List<Integer> getAgeFromUsers(List<User> user){
-        throw new NotImplementedException();
+        return user.stream().map(User::getAge).collect(toList());
     }
 
     public static List<Integer> getDistinctAges(List<User> users){
@@ -25,15 +27,26 @@ public class Stream8 {
     }
 
     public static List<User> getLimitedUserList(List<User> users, int limit){
-        throw new NotImplementedException();
+        return users.stream().limit(limit).collect(toList());
+        //tutaj nie mapujemy bo tylko chcemy skrócić istniejącą listę do dwóch indeksów więc bierzemy
+        //listę i limitujemy do dwóch
     }
 
     public static Integer countUsersOlderThen25(List<User> users){
-        throw new NotImplementedException();
+        Long count = users.stream().filter(e -> e.getAge() > 25).count();
+        return count.intValue();
+//        return new Long(users.stream().filter(e->e.getAge()>25).count()).intValue();
     }
 
     public static List<String> mapToUpperCase(List<String> strings){
-        throw new NotImplementedException();
+      /*  List<String> result = new ArrayList<>();
+       result = strings.stream()
+                .map(e->e.toUpperCase())
+                .collect(Collectors.toList());
+        return result;*/ //tak zrobiłem a można krócej
+        return strings.stream()
+                .map(String::toUpperCase)
+                .collect(toList());
     }
 
     public static Integer sum(List<Integer> integers){

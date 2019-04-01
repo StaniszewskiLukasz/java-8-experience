@@ -12,17 +12,18 @@ public class OptionalTest {
 
     @Test
     public void shouldCreateEmptyOptional(){
-        Optional<String> optional = Optional.empty();// create empty optional
-        //tu był null, wiedziałem że optional nie może być nullem ale próbowałem coś zrobić na instancji
+//        Optional<String> optional = new Optional<>();//tak nie można ciekawe czemu???
+        Optional<String> optional1 = Optional.empty();// create empty optional
+        //tu był null, wiedziałem, że optional nie może być nullem, ale próbowałem coś zrobić na instancji
         //a trzeba było wywołać metodę na klasie
-        assertThat(optional.isPresent(),equalTo(false));
+        assertThat(optional1.isPresent(),equalTo(false));
         //DONE
     }
 
     @Test
     public void shouldReturnBookName(){
         Optional<Book> book = Optional8.getBook();
-        String bookName = book.get().getName();// ja zrobiłem tak
+        String bookName = book.get().getName();// ja zrobiłem tak i tak jest czytelniej
         String bookName1 = book.map(Book::getName).orElse("");//oni podali takie rozwiązanie
         assertThat(bookName,equalTo("Experience Java 8"));
         //DONE
@@ -41,14 +42,19 @@ public class OptionalTest {
 
     @Test(expected = NoSuchElementException.class)
     public void shouldThrowNoElementException(){
-        Optional<Book> book = Optional8.getBook();
-        book.get().getAuthor();
+        Optional<Book> book = Optional.empty();
+        //wystarczy powyżej zmienić na Optional.empty ta metoda jeśli nie wykryję elementu rzuci tym wyjątkiem
+        System.out.println(book.get().getAuthor());
+//DONE
     }
 
     @Test(expected = MyCustomException.class)
-    public void shouldThrowOptionalEmptyException(){
+    public void shouldThrowOptionalEmptyException() throws MyCustomException{
+        //trzeba dopisać throws dlatego że to nasz wyjątek a nie z klasy Optional
         Optional<Book> book = Optional8.getBook();
-        book.get().getAuthor(); // getAuthor.or.....
+        book.get().getAuthor().orElseThrow(MyCustomException::new); // getAuthor.or.....
+        //tutaj trzeba dołożyć metodę znajdz autor lub rzuć wyjątkiem i wpisać wyjątek ale też w deklaracji
+        //metody dopisać o jaki wyjątek chodzi.
     }
 
 }
