@@ -55,4 +55,8 @@ public class User {
         return users;
     }
 
+    @Override
+    public String toString() {
+        return name ;
+    }
 }

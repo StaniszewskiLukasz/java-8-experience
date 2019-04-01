@@ -63,6 +63,7 @@ public class StreamTest {
         List<User> users = User.getUsersWithAge(18, 20, 20, 21, 22, 22, 23, 24, 25, 26);
         List<Integer> distinctAges = Stream8.getDistinctAges(users);
         assertThat(distinctAges, is(equalTo(Arrays.asList(18, 20, 21, 22, 23, 24, 25, 26))));
+        //DONE
     }
 
     @Test
@@ -70,27 +71,34 @@ public class StreamTest {
         List<Integer> integers = asList(1, 2, 3, 4, 5);
         Integer result = Stream8.sum(integers);
         assertThat(result, equalTo(1 + 2 + 3 + 4 + 5));
+        //DONE
     }
 
     @Test
     public void shouldSkipInCollection() {
-        List<Integer> integers = asList(1, 2, 3, 4, 5);
+        List<Integer> integers = asList(1, 3, 4, 6, 8);
         List<Integer> result = Stream8.skip(integers, 2);
-        assertThat(result, equalTo(Arrays.asList(3, 4, 5)));
+        //skip przyjmuje numer indeksu a nie wartość po któej mamy zacząć kolecjonować
+        //numer indeksu skip podajemy włącznie czyli eten co podamy też zostanie pominięty
+        System.out.println(result);
+        assertThat(result, equalTo(Arrays.asList(4, 6, 8)));
+        //DONE
     }
 
     @Test
-    public void shouldReturnFirstNames() {
+    public void shouldReturnFirstNames() {  //co tu ię dzieje pod spodem???
         List<String> names = asList("Homer Simpson", "Marge Simpson", "Bart Simpson", "Kent Brockman");
         List<String> result = Stream8.getFirstNames(names);
         assertThat(result, equalTo(Arrays.asList("Homer", "Marge", "Bart", "Kent")));
+        //DONE
     }
 
     @Test
-    public void shouldReturnDistinctLetters() {
+    public void shouldReturnDistinctLetters() {//co tu się dzieje pod spodem???
         List<String> names = asList("Homer Simpson", "Marge Simpson", "Bart Simpson", "Kent Brockman");
         List<String> result = Stream8.getDistinctLetters(names);
         assertThat(result, equalTo(Arrays.asList("H", "o", "m", "e", "r", " " , "S", "i", "p", "s", "n", "M", "a", "g", "B", "t", "K", "c", "k")));
+    //DONE
     }
 
     @Test
@@ -101,6 +109,7 @@ public class StreamTest {
                 new User("Bart"));
         String result = Stream8.separateNamesByComma(input);
         assertThat(result, equalTo("Homer, Maggie, Bart"));
+        //DONE
     }
 
     @Test
@@ -109,6 +118,7 @@ public class StreamTest {
         assertThat(Stream8.getMinAge(users), equalTo(10));
         assertThat(Stream8.getMaxAge(users), equalTo(30));
         assertThat(Stream8.getAverageAge(users), equalTo((double)(10+20+30)/3));
+        //DONE
     }
 
     @Test
@@ -121,6 +131,8 @@ public class StreamTest {
         Map<Boolean, List<User>> result = Stream8.partionUsersByGender(input);
         assertThat(result.get(true), containsInAnyOrder(homer, bart));
         assertThat(result.get(false), containsInAnyOrder(maggie, lisa));
+        //przeanalizować jeszcze raz. UWAGA MAGIA!
+        //DONE
     }
 
     @Test
@@ -135,6 +147,8 @@ public class StreamTest {
         assertThat(result.get(12), containsInAnyOrder(bart));
         assertThat(result.get(8), containsInAnyOrder(lisa));
         assertThat(result.get(2), containsInAnyOrder(maggie));
+        //przeanalizować jeszcze raz. UWAGA MAGIA!
+        //DONE
     }
 
     @Test
@@ -149,6 +163,7 @@ public class StreamTest {
         assertThat(result.get(true).get(12), containsInAnyOrder(bart));
         assertThat(result.get(false).get(8), containsInAnyOrder(lisa));
         assertThat(result.get(false).get(2), containsInAnyOrder(maggie));
+        //DONE
     }
 
     @Test

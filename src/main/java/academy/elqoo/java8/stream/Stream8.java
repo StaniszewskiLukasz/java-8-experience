@@ -4,13 +4,25 @@ package academy.elqoo.java8.stream;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 public class Stream8 {
+
+    public static List<String> mapToUpperCase(List<String> strings){
+      /*  List<String> result = new ArrayList<>();
+       result = strings.stream()
+                .map(e->e.toUpperCase())
+                .collect(Collectors.toList());
+        return result;*/ //tak zrobiłem a można krócej
+        return strings.stream()
+                .map(String::toUpperCase)
+                .collect(toList());
+    }
 
     public static List<Integer> returnSquareRoot(List<Integer> numbers){
         return numbers.stream().map(Math::sqrt).map(Double::intValue).collect(toList());
@@ -20,10 +32,6 @@ public class Stream8 {
 
     public static List<Integer> getAgeFromUsers(List<User> user){
         return user.stream().map(User::getAge).collect(toList());
-    }
-
-    public static List<Integer> getDistinctAges(List<User> users){
-        throw new NotImplementedException();
     }
 
     public static List<User> getLimitedUserList(List<User> users, int limit){
@@ -38,60 +46,76 @@ public class Stream8 {
 //        return new Long(users.stream().filter(e->e.getAge()>25).count()).intValue();
     }
 
-    public static List<String> mapToUpperCase(List<String> strings){
-      /*  List<String> result = new ArrayList<>();
-       result = strings.stream()
-                .map(e->e.toUpperCase())
-                .collect(Collectors.toList());
-        return result;*/ //tak zrobiłem a można krócej
-        return strings.stream()
-                .map(String::toUpperCase)
-                .collect(toList());
+    public static List<Integer> getDistinctAges(List<User> users){
+        return users.stream().map(User::getAge).distinct().collect(Collectors.toList());
+        //mamy listę Userów przerobić na listę integer z wiekiem userow niepowtarzającym się
     }
 
     public static Integer sum(List<Integer> integers){
-        throw new NotImplementedException();
+        return integers.stream().reduce(0,Math::addExact);
     }
 
     public static List<Integer> skip(List<Integer> integers, Integer toSkip){
-        throw new NotImplementedException();
+       return integers.stream().skip(toSkip).collect(Collectors.toList());
     }
 
     public static List<String> getFirstNames(List<String> names){
-        throw new NotImplementedException();
+        //co tu ię dzieje pod spodem???
+       return names.stream().map(e->e.split(" ")).map(e->e[0]).collect(Collectors.toList());
+       //tu mamy z imion i nazwisk wrzuconych do listy pobrać do drugiej listy same imiona
+        // najpierw dzielimy po białym znaku i wrzucamy każdy z indeksem 0 do nowej listy
     }
 
     public static List<String> getDistinctLetters(List<String> names){
-        throw new NotImplementedException();
+        //co tu ię dzieje pod spodem???
+        return names.stream()
+                .map(e->e.split(""))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
-
     public static String separateNamesByComma(List<User> users){
-        throw new NotImplementedException();
+//        return users.stream()
+//                .map(User::getName)
+//                .toString(); zrobienie tak i stworzenie toStringa w User nie dało efektów
+        //zwracało miejsce w pamięci
+    return users.stream()
+            .map(User::getName)
+            .collect(Collectors.joining(", "));
     }
 
     public static double getAverageAge(List<User> users){
-        throw new NotImplementedException();
+        return users.stream().mapToInt(User::getAge).average().orElse(0);
     }
 
     public static Integer getMaxAge(List<User> users){
-        throw new NotImplementedException();
+        return users.stream()
+                .map(User::getAge).max(Comparator.comparing(Function.identity()))
+                .orElse(0);
     }
 
     public static Integer getMinAge(List<User> users) {
-        throw new NotImplementedException();
+        return users.stream()
+                .map(User::getAge)
+                .min(Comparator.comparing(Function.identity()))
+                .orElse(0);
     }
 
     public static Map<Boolean, List<User>> partionUsersByGender(List<User> users){
-        throw new NotImplementedException();
+        return users.stream().collect(partitioningBy(User::isMale));
+        //tworzymy mapę
+        //co tu się odpier...???!!! Magia!!!
     }
 
     public static Map<Integer, List<User>> groupByAge(List<User> users){
-        throw new NotImplementedException();
+        return users.stream().collect(groupingBy(User::getAge));
+        //tworzymy mapę
+        //z tego co rozumiem groupingBy zawsze zwraca mapę <coś-Lista <czegoś>>
     }
 
     public static Map<Boolean, Map<Integer, List<User>>> groupByGenderAndAge(List<User> users){
-        throw new NotImplementedException();
+      return users.stream().collect(groupingBy(User::isMale,groupingBy(User::getAge)));
     }
 
     public static Map<Boolean, Long> countGender(List<User> users){
