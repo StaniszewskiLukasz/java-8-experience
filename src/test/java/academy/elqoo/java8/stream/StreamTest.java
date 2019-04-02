@@ -176,18 +176,21 @@ public class StreamTest {
         Map<Boolean, Long> result = Stream8.countGender(input);
         assertThat(result.get(true), equalTo(2L));
         assertThat(result.get(false), equalTo(2L));
+        //DONE
     }
 
     @Test
     public void shouldMatchAge(){
         List<User> users = User.getUsersWithAge(10, 20, 30);
         assertTrue(Stream8.anyMatch(users, 10));
+        //DONE
     }
 
     @Test
     public void shouldNoneMatchAge(){
         List<User> users = User.getUsersWithAge(10, 20, 30);
         assertTrue(Stream8.noneMatch(users, 40));
+        //DONE
     }
 
     @Test
@@ -199,6 +202,7 @@ public class StreamTest {
         List<User> users = asList(homer, bart, maggie, lisa);
         Optional<User> user = Stream8.findAny(users, "Homer");
         assertTrue(user.isPresent());
+        //DONE
     }
 
     @Test
@@ -210,6 +214,7 @@ public class StreamTest {
         List<User> users = asList(homer, bart, maggie, lisa);
         List<User> sorted = Stream8.sortByAge(users);
         assertThat(sorted, contains(maggie, lisa, bart, homer));
+        //DONE
     }
 
     @Test
@@ -221,6 +226,7 @@ public class StreamTest {
         List<User> users = asList(homer, bart, maggie, lisa);
         User oldest = Stream8.findOldest(users);
         assertThat(oldest, equalTo(homer));
+        //DONE
     }
 
     @Test
@@ -232,6 +238,7 @@ public class StreamTest {
         List<User> users = asList(homer, bart, maggie, lisa);
         int sumAge = Stream8.sumAge(users);
         assertThat(sumAge, equalTo(50+12+2+8));
+        //DONE
     }
 
     @Test
@@ -242,10 +249,14 @@ public class StreamTest {
         User lisa = new User("Lisa", 8);
         List<User> users = asList(homer, bart, maggie, lisa);
         IntSummaryStatistics statistics = Stream8.ageSummaryStatistics(users);
+        System.out.println(statistics);
         assertThat(statistics.getAverage(), equalTo((double)(50+12+2+8)/4));
         assertThat(statistics.getCount(),equalTo(4L));
         assertThat(statistics.getMax(),equalTo(50));
         assertThat(statistics.getMin(),equalTo(2));
+        //poprzez mapToInt i metodęSummaryStatistics zwraca od razu liczbę elementów, sumę wartości przeszukiwanego pola
+        //wartość minimalną, wartość maksymalną i średnią wartości przeszukiwanego pola/zmiennej
+        //DONE
     }
 
     @Test
@@ -254,18 +265,25 @@ public class StreamTest {
         IntStream intStream = numbers.stream().mapToInt(value -> value);
         Stream<Integer> boxedStream = Stream8.getBoxedStream(intStream);
         assertTrue(boxedStream.count() == 3);
+        //co tu się dzieje, jaki jest cel i wynik metody???
+        //ToDo
+        //DONE
     }
 
     @Test
     public void shouldBeEmptyStream(){
-        Stream<Integer> numberStream =null; //create empty stream
+        Stream<Integer> numberStream = Stream.<Integer>builder().build();
+        Stream<Integer> numberStream1 = Stream.of(1,2); //tak lub tak można to zrobić
         assertNotNull(numberStream);
+        assertNotNull(numberStream1);
     }
 
     @Test
     public void shouldGenerateFirstPrimeNumbers(){
         List<Integer> primeNumbers = Stream8.generateFirst10PrimeNumbers();
         assertThat(primeNumbers, contains(2,3,5,7,11,13, 17,19, 23, 29));
+        //ToDo przejrzeć, przekopiowałem rozwiązanie trzeba to lepiej rozpoznać
+        //DONE
     }
 
     @Test
