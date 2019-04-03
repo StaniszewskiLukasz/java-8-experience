@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface Shape {
 
+   /* static void moveXPosWith10(Collection<Shape> shapes){
+        shapes.forEach(shape -> shape.setXPos(shape.getXPos()+10));
+    }*///ich rozwiązanie ze strony
+
     static void moveXPosWith10(List<AbstractShape> shapes) {
         for (AbstractShape shape : shapes) {
-            System.out.println("Wartość xPos dla obiektu przed dodaniem " + shape.getXPos());
             shape.setXPos(shape.getXPos()+10);
-            System.out.println("Wartość xPos dla obiektu po dodaniu " + shape.getXPos());
         }
     }
 

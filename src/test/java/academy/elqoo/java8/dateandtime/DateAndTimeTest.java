@@ -155,5 +155,4 @@ public class DateAndTimeTest {
         LocalDate expected = LocalDate.of(2017, JANUARY, 13);
         assertEquals(expected, DateTime8.findNextFriday13th(from));
     }
-
 }

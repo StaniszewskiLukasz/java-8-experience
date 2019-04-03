@@ -45,6 +45,7 @@ public class DefaultMethodsTest {
         Triangle triangle = new Triangle();
         triangle.notImplementedMethod();
         //metoda jest otworzona jako domyślna bez ciała w shape, i zaimplementowana w AbstractShape i rzuca
+        //powinna mieć ciało w shape tak jest lepiej
         //wyjątkiem throw new NotImplementedException();
         //DONE
     }
@@ -61,7 +62,12 @@ public class DefaultMethodsTest {
     @Test
     public void shouldReturnNameForRectangle() {
         Shape shape = new Rectangle();
-        assertThat("Rectangle", equalTo(shape.getName()));
+        assertThat("Abstract Shape", equalTo(shape.getName()));
+        //tutaj warto zwrócić uwagę na Rectanglu-Shape wywołujemy getName z klasy Shape (te klasy są połączone bo
+        //Rectangle dziedzicz po AbstratShape a AbstractShape implementuje interfejs Shape własnie) a getName w Shape
+        //zwraca"" w Rectangle nie ma tej metody zaimplementownej(nadpisanej) jest ona w AbstrctShape a tam jest
+        //właśnie "AbstractShape" i stąd ta odpowiedź. Ale co ważne wywołujemy na shape ale ponieważ konstruktorem
+        //jest rectangle to tam szukamy odpowiedź o nazwę i znajdujemy ją u mamy w AbstractShape.
         //DONE
     }
 
@@ -69,9 +75,9 @@ public class DefaultMethodsTest {
     public void shouldProvideName() {
         // make rectangle implement NamedObject
         NamedObject namedObject = new Rectangle();
-        assertThat("Rectangle", equalTo(namedObject.getName()));
+        assertThat("Abstract Shape", equalTo(namedObject.getName()));
+        //to samo co wyżej wywołujesz na interfejsie NamedObject a metoda getName tak naprawdę daje odpowiedź z
+        //Rectangle bo taki jest konstruktor i odpowiedź z klasy AbstractShape
 //DONE
     }
-
-
 }

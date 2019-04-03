@@ -56,6 +56,8 @@ public class AbstractShape implements Shape {
     @Override
     public void notImplementedMethod(){
         throw new NotImplementedException();
+        //ciało tej metody w rozwiązniu jest w Shape i tak jest lepiej bo interfejs górą ponad dziedziczenie a u mnie ciało
+        //jest właśnie u rodzica czyli w klasie AbstractShape
     }
 
     @Override
