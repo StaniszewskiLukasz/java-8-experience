@@ -41,6 +41,7 @@ public class CharacterSpliterator implements Spliterator<Character> {
 
     @Override
     public long estimateSize() {
+
         return string.length() - currentChar;
     }
 

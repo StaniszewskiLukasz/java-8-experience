@@ -8,8 +8,8 @@ public class DateTime8 {
 
     public static final long DAYS_BETWEEN = 5;
 
-    public static LocalDate createNewYearsEve2017(){
-        return LocalDate.of(2017,12,31);
+    public static LocalDate createNewYearsEve2018(){
+        return LocalDate.of(2018,12,31);
     }
 
     public static LocalDate[] getTwoLocalDates(){
@@ -20,7 +20,7 @@ public class DateTime8 {
     }
 
     public static LocalDate findNextFriday13th(LocalDate from){
-        throw new NotImplementedException();
+    return null;
     }
 
 }
