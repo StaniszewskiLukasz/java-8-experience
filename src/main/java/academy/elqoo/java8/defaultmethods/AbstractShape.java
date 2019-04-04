@@ -9,7 +9,7 @@ public class AbstractShape implements Shape {
     private int yPos = 0;
 
 
-    @Override
+   /* @Override//tej metody nie powinno tu być tylko w Shape
     public void move(int xPosValue, int yPosValue) {
         System.out.println("Wartość this.xPos przed dodaniem " + this.getXPos());
         this.setXPos(xPosValue);
@@ -51,7 +51,7 @@ public class AbstractShape implements Shape {
         //każde z moich powyższych działani tworzy nowy obiekt każdy z nich ma nowe miejsce w pamięci,
         //ale myślałem że każdy ustawiając wartość dla xPos czy yPos odwołuje się do tego samego pola dopóki
         //xPos i yPos nie są static każdy z tych obiektów ma swoje pole xPos i yPos
-    }
+    }*/
 
     @Override
     public void notImplementedMethod(){

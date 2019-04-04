@@ -32,17 +32,21 @@ public class Stream8 {
 
     public static List<Integer> getAgeFromUsers(List<User> user) {
         return user.stream().map(User::getAge).collect(toList());
+        //dlaczego tu jest mapa a nie filtr??? Bo Map przyjmuje interfejs Function a filter Predicate.
+        //Predicate wymaga podania jakiegoś warunku który jesli bedzie spełniony to zostanie odfiltrowane
+        //żądanie podaj wiek to nie warunek
     }
 
     public static List<User> getLimitedUserList(List<User> users, int limit) {
         return users.stream().limit(limit).collect(toList());
         //tutaj nie mapujemy bo tylko chcemy skrócić istniejącą listę do dwóch indeksów więc bierzemy
-        //listę i limitujemy do dwóch
+        //listę i limitujemy do dwóch i wrzucamy zlimitowaną do nowej krótszej listy
     }
 
     public static Integer countUsersOlderThen25(List<User> users) {
         Long count = users.stream().filter(e -> e.getAge() > 25).count();
         return count.intValue();
+//        musi być duży Long by skorzystać z intValue, trzeba pamiętać metodę count że istnieje
 //        return new Long(users.stream().filter(e->e.getAge()>25).count()).intValue();
     }
 
@@ -52,6 +56,7 @@ public class Stream8 {
     }
 
     public static Integer sum(List<Integer> integers) {
+
         return integers.stream().reduce(0, Math::addExact);
     }
 
@@ -60,14 +65,16 @@ public class Stream8 {
     }
 
     public static List<String> getFirstNames(List<String> names) {
-        //co tu ię dzieje pod spodem???
+        //tutaj najpierw dzielimy string na dwie grupy potem wskazujemy którą grupę z jakim indeksem wrzucamy do listy
         return names.stream().map(e -> e.split(" ")).map(e -> e[0]).collect(Collectors.toList());
         //tu mamy z imion i nazwisk wrzuconych do listy pobrać do drugiej listy same imiona
         // najpierw dzielimy po białym znaku i wrzucamy każdy z indeksem 0 do nowej listy
     }
 
     public static List<String> getDistinctLetters(List<String> names) {
-        //co tu ię dzieje pod spodem???
+        //najpierw dzielimy każdego stringa na pojedyncze znaki, metoda split wrzuca je do tablicy każdy pod inny
+        //indeks. Używamy więc metody flatMap by na klasie Arrays wywołać metodę stremowania (ponownie)
+        //przeszukujemy tą tablicę po znakach wyjątkowych i wrzucamy je do listy wynikowej
         return names.stream()
                 .map(e -> e.split(""))
                 .flatMap(Arrays::stream)
@@ -83,6 +90,7 @@ public class Stream8 {
         return users.stream()
                 .map(User::getName)
                 .collect(Collectors.joining(", "));
+        //łączymy elementy w jednego stringa dopiero na poziomie kolekcjonowania
     }
 
     public static double getAverageAge(List<User> users) {
@@ -92,6 +100,7 @@ public class Stream8 {
     public static Integer getMaxAge(List<User> users) {
         return users.stream()
                 .map(User::getAge).max(Comparator.comparing(Function.identity()))
+                //Function.identity zwraca zwsze to co przyjmuje parametr tego samego typu
                 .orElse(0);
     }
 

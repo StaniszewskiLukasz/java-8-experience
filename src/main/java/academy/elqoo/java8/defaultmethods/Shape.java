@@ -29,7 +29,10 @@ public interface Shape {
         return "";
     }
 
-    void move(int xPosValue, int yPosValue);
+    default void move(int xPos, int yPos){
+        setXPos(xPos);
+        setYPos(yPos);
+    }
 
     void notImplementedMethod();
 }

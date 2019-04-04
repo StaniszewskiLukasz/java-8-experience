@@ -12,6 +12,7 @@ public class OptionalTest {
 
     @Test
     public void shouldCreateEmptyOptional(){
+        //pokazuje że pusty Optional na metodzie isPresent zwróci wynik negatywny
 //        Optional<String> optional = new Optional<>();//tak nie można ciekawe czemu???
         Optional<String> optional1 = Optional.empty();// create empty optional
         //tu był null, wiedziałem, że optional nie może być nullem, ale próbowałem coś zrobić na instancji
@@ -22,6 +23,7 @@ public class OptionalTest {
 
     @Test
     public void shouldReturnBookName(){
+        //jak wyciągnąć coć z Optionala i wrzucić np. do Stringa
         Optional<Book> book = Optional8.getBook();
         String bookName = book.get().getName();// ja zrobiłem tak i tak jest czytelniej
         String bookName1 = book.map(Book::getName).orElse("");//oni podali takie rozwiązanie
@@ -32,11 +34,16 @@ public class OptionalTest {
     @Test
     public void shouldReturnBookAuthor(){
         Optional<Book> book = Optional8.getBookWithAuthor();
+        //String authorName = book.get().getAuthor(); tak być nie może bo to zwraca Optionala a ma być String
+        String authorName1 = book.get().getAuthor().orElse("");
+        //ale można tak bo orElse zwróci Stringa, tylko że metoda get bez wcześniejszego sprawdzenia isPresent
+        //może zwrócić NullPointera czy cś w pobliżu:)
         String authorName = book.flatMap(Book::getAuthor).orElse("");
         //tutaj musi być flatMap chyba dlatego że ten book ma nie tylko autora ale także i nazwę i trzeba
-        //te dane pominąć a metoda map dopominłaby się o wyświetlenie także nazwy
+        //te dane pominąć a metoda map dopominłaby się o wyświetlenie także nazwy, później referencja do metody
         System.out.println(authorName);
         assertThat(authorName,equalTo("Stijn De Mulder"));
+        assertThat(authorName1,equalTo("Stijn De Mulder"));
         //DONE
     }
 
