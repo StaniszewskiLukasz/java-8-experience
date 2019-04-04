@@ -120,7 +120,7 @@ public class Stream8 {
     public static Map<Integer, List<User>> groupByAge(List<User> users) {
         return users.stream().collect(groupingBy(User::getAge));
         //tworzymy mapę
-        //z tego co rozumiem groupingBy zawsze zwraca mapę <coś-Lista <czegoś>>
+        //groupingBy zawsze zwraca mapę <coś-Lista <czegoś>>
     }
 
     public static Map<Boolean, Map<Integer, List<User>>> groupByGenderAndAge(List<User> users) {
@@ -154,10 +154,12 @@ public class Stream8 {
 
     public static User findOldest(List<User> users) {
         return users.stream().max(Comparator.comparing(User::getAge)).get();
+        //na końcu urzywamy get() by wynik był Userem
     }
 
     public static int sumAge(List<User> users) {
         return users.stream().mapToInt(User::getAge).sum();
+        //tutaj trzeba urzyć mapToInt a nie map bo ta pierwsza metoda ma wbudowaną metodę sum()
     }
 
     public static IntSummaryStatistics ageSummaryStatistics(List<User> users) {

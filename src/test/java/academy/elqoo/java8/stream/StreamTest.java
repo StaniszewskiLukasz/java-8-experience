@@ -296,6 +296,7 @@ public class StreamTest {
     public void shouldCollectToString(){
         String sample = "Working with Java8 Streams";
         String result = sample.chars().mapToObj(a -> ((char) a)).collect(new CharacterToStringCollector());
+        System.out.println(result);
         assertThat(sample,equalTo(result));
     }
 }
